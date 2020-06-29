@@ -35,7 +35,7 @@ func StartWebServer() {
 	s.routes()
 
 	// If we'd want to log result in the console, we could launch a goroutine every X seconds
-	go consoleViewer(5)
+	//go consoleViewer(5)
 
 	log.Fatal(http.ListenAndServe(":8085", s.router))
 }
@@ -56,9 +56,12 @@ func consoleViewer(occurence int) {
 	for {
 		select {
 		case <-ticker.C:
-			vs := dao.GetVelibsStation()
-			vs = dao.GetAvailableVelibsForStation(vs)
-
+			vs, err := dao.GetVelibsStation(); if err != nil {
+				log.Printf("Error getting Velib stations near Splio, errror : %v", err)
+		}
+			vs, err = dao.GetAvailableVelibsForStation(vs); if err != nil {
+				log.Printf("Error reading Velib API results, errror : %v", err)
+		}
 			for _, s := range vs {
 				log.Printf("Station %v : Nombre de vélo : %v \n", s.Name, s.VelibAvailable)
 			}

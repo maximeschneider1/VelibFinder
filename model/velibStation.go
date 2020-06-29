@@ -5,6 +5,9 @@ type Station struct {
 	Name string `json:"station"`
 	Id string `json:"station_id"`
 	VelibAvailable int `json:"num_bikes_available"`
+	MechanicalVelib int `json:"num_mechanical_bikes"`
+	ElectricVelib int `json:"num_electric_bikes"`
+	StationImage string `json:"station_img"`
 }
 
 // VelibAPIResponse is the API response for the stations status

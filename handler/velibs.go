@@ -17,8 +17,26 @@ func (s *server) handleGetVelib() httprouter.Handle {
 
 		var resp response
 
-		vs := dao.GetVelibsStation()
-		vs = dao.GetAvailableVelibsForStation(vs)
+		vs, err := dao.GetVelibsStation(); if err != nil {
+			resp.Error = "Internal Server Error"
+			resp.Message = "Error getting Velib stations near Splio"
+			resp.StatusCode = http.StatusInternalServerError
+			w.WriteHeader(http.StatusInternalServerError)
+			err = json.NewEncoder(w).Encode(resp); if err!= nil {
+				log.Printf("Error encoding response : %v", err)
+			}
+		}
+
+
+		vs, err = dao.GetAvailableVelibsForStation(vs); if err != nil {
+			resp.Error = "Internal Server Error"
+			resp.Message = "Error reading Velib API results"
+			resp.StatusCode = http.StatusInternalServerError
+			w.WriteHeader(http.StatusInternalServerError)
+			err = json.NewEncoder(w).Encode(resp); if err!= nil {
+				log.Printf("Error encoding response : %v", err)
+			}
+		}
 
 		resp.Data = append(resp.Data, vs)
 		resp.StatusCode = http.StatusOK
@@ -26,7 +44,7 @@ func (s *server) handleGetVelib() httprouter.Handle {
 		resp.Error = "No error"
 		resp.Meta.Query = fmt.Sprintln("List of Velib station capacities near Splio HQ")
 		w.WriteHeader(http.StatusOK)
-		err := json.NewEncoder(w).Encode(resp); if err!= nil {
+		err = json.NewEncoder(w).Encode(resp); if err!= nil {
 			log.Printf("Error encoding response : %v", err)
 		}
 	}

@@ -1,22 +1,32 @@
 [
   {
     "station": "Choiseul - Quatre Septembre",
-    "station_id": "2012"
+    "station_id": "2012",
+    "station_img":"https://static.cnews.fr/sites/default/files/styles/image_640_360/public/img_1627.jpg?itok=UKmxSi7G"
   },
   {
     "station": "Louis le Grand - Italiens",
-    "station_id": "2015"
+    "station_id": "2015",
+    "station_img":"https://img.lemde.fr/2018/01/08/0/0/3500/2129/688/0/60/0/74b2ddf_GFM207_PARIS-BICYCLES-VELIB_0108_11.JPG"
   },
   {
     "station": "Favart - Italiens",
-    "station_id": "2013"
+    "station_id": "2013",
+    "station_img":"https://static.latribune.fr/1008585/velib.jpg"
   },
   {
     "station": "Laffitte - Italiens",
-    "station_id": "9023"
+    "station_id": "9023",
+    "station_img":"https://cdn.radiofrance.fr/s3/cruiser-production/2018/11/1f6f342d-d625-4f6f-b458-e1d01505e308/870x489_velib_1000-stations.jpg"
+  },
+  {
+    "station": "Taitbout - La Fayette",
+    "station_id": "9024",
+    "station_img":"https://www.affiches-parisiennes.com/content/images/2018/11/20/8490/adobestock218483815-ld.jpg"
   },
   {
     "station": "Chaussée d'Antin - Haussman",
-    "station_id": "9039"
+    "station_id": "9039",
+    "station_img":"https://static.lpnt.fr/images/2018/03/01/13544183lpw-13544253-article-rea259109004-jpg_5043111_1250x625.jpg"
   }
 ]
