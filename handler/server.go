@@ -34,24 +34,8 @@ func StartWebServer() {
 
 	s.routes()
 
-	// If we'd want to log result in the console, we could launch a goroutine every X minutes
-	go func() {
-		var ticker = time.NewTicker(10 * time.Second)
-		for {
-			select {
-			case <-ticker.C:
-
-				vs := dao.GetVelibsStation()
-				vs = dao.GetAvailableVelibsForStation(vs)
-
-				for _, s := range vs {
-					log.Printf("Station %v : Nombre de vélo : %v \n", s.Name, s.VelibAvailable)
-				}
-
-			}
-		}
-	} ()
-
+	// If we'd want to log result in the console, we could launch a goroutine every X seconds
+	go consoleViewer(5)
 
 	log.Fatal(http.ListenAndServe(":8085", s.router))
 }
@@ -65,4 +49,19 @@ func (s *server) routes() {
 func handlePanic(w http.ResponseWriter, r *http.Request, err interface{}) {
 	log.Println(r.URL.Path, err)
 	w.WriteHeader(http.StatusInternalServerError)
+}
+
+func consoleViewer(occurence int) {
+	var ticker = time.NewTicker(time.Duration(occurence) * time.Second)
+	for {
+		select {
+		case <-ticker.C:
+			vs := dao.GetVelibsStation()
+			vs = dao.GetAvailableVelibsForStation(vs)
+
+			for _, s := range vs {
+				log.Printf("Station %v : Nombre de vélo : %v \n", s.Name, s.VelibAvailable)
+			}
+		}
+	}
 }
