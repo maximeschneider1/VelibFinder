@@ -27,7 +27,6 @@ func (s *server) handleGetVelib() httprouter.Handle {
 			}
 		}
 
-
 		vs, err = dao.GetAvailableVelibsForStation(vs); if err != nil {
 			resp.Error = "Internal Server Error"
 			resp.Message = "Error reading Velib API results"

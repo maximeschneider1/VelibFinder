@@ -11,6 +11,7 @@ import (
 // server is the base structure of the API
 type server struct {
 	router *httprouter.Router
+
 	// Here I would put a DB connection if there was one
 }
 
@@ -35,7 +36,7 @@ func StartWebServer() {
 	s.routes()
 
 	// If we'd want to log result in the console, we could launch a goroutine every X seconds
-	//go consoleViewer(5)
+	go consoleViewer(60)
 
 	log.Fatal(http.ListenAndServe(":8085", s.router))
 }
@@ -51,6 +52,7 @@ func handlePanic(w http.ResponseWriter, r *http.Request, err interface{}) {
 	w.WriteHeader(http.StatusInternalServerError)
 }
 
+// consoleViewer prints results in the console every x seconds
 func consoleViewer(occurence int) {
 	var ticker = time.NewTicker(time.Duration(occurence) * time.Second)
 	for {

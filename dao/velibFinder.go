@@ -8,6 +8,7 @@ import (
 	"net/http"
 )
 
+// GetVelibsStation reads JSON file with Velib stations close to Splio HQ
 func GetVelibsStation() ([]model.Station, error) {
 	stationFile, _ := ioutil.ReadFile("./stations.json")
 
@@ -37,6 +38,7 @@ func GetAvailableVelibsForStation(allStations []model.Station) ([]model.Station,
 		return nil, err
 	}
 
+	// Get information concerning stations of interest
 	for _, stations := range vr.Data.Stations {
 		for i, s := range allStations {
 			if stations.StationCode == s.Id {

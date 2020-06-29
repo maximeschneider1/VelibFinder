@@ -4,8 +4,8 @@ This API allows Splio employees of Splio HQ to know the number of available veli
 
 ### Package description 
 
-- dao : Responsible for getting data from various sources 
 - handler : API structure and endpoint exposition
+- dao : Responsible for getting data from various sources 
 - model : all used data model related to application logic
 
 ### Launching
@@ -22,4 +22,4 @@ To test the health-check function, in folder /handler, please run :
 
 ### Possible amelioration 
 
-Velib API also exposes the number of mechanical and electric Velib available per station, which can be distributed through the API. As we all know, electric ones are way better ;-) 
+- Include a post endpoint for the user to add his favorites stations   
